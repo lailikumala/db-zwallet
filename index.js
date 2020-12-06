@@ -61,7 +61,8 @@ app.use('/api/change_photo', photoRoute)
 //     console.log("User disconnect");
 //   });
 // });
+const port = process.env.PORT || '8000'
 
-app.listen(process.env.DEFAULT_PORT, () => {
-  console.log(`server running on port ${process.env.DEFAULT_PORT}`);
+app.listen(port, () => {
+  console.log(`server running on port ${port}`);
 });
