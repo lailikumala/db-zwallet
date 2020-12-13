@@ -7,17 +7,13 @@ multer and cors with authentication and authorization.
 ## process
  before starting the program install the packages and other features.
   ### Create a folder and initialize the project
-   
-      ```
-      npm init -y
-      
-      ```
+   ```
+  npm init -y
+  ```
   ### install packages
-   
-      ```
-      npm i mysql express body-parser jsonwebtoken multer cors dotenv
-      
-      ```
+  ```
+  npm i mysql express body-parser jsonwebtoken multer cors dotenv
+  ```
 
 ## link documentation postman 
 https://documenter.getpostman.com/view/12536288/TVmHCeN7
