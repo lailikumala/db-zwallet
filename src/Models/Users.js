@@ -28,7 +28,7 @@ const userModel = {
 
     getUserPagination: (body, page, limit)=> {
         return new Promise((resolve, reject) => {
-            if(!limit) limit = 6;
+            if(!limit) limit = 4;
             else limit = parseInt(limit);
 
             if(!page) page = 1;
@@ -51,7 +51,7 @@ const userModel = {
 
             if(!page) page = 1;
             else page = parseInt(page);
-            const query = `SELECT name, phone, photo FROM users WHERE name LIKE '${name}%' ORDER BY name ASC LIMIT ${limit} OFFSET ${(page-1) * limit}`
+            const query = `SELECT id, name, phone, photo FROM users WHERE name LIKE '${name}%' ORDER BY name ASC LIMIT ${limit} OFFSET ${(page-1) * limit}`
             db.query(query, body, (err, res)=> {
                 if(!err) {
                     resolve(res)
