@@ -3,6 +3,28 @@ const formResponse = require("../Helpers/FormResponse");
 
 module.exports = {
 
+  checkPin: (req, res) => {
+    const { id, pin } = req.body;
+      userModel.checkPin(id, pin)
+        .then((data) => {
+          if (data.length) {
+            formResponse(data, res, 200)
+          } else {
+            res.status(400).send({
+              success: false,
+              message: "Pin Is Wrong!",
+            });
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({
+            success: false,
+            message: "Internal Server Error",
+          });
+        });
+      },
+
+
   getUserName: (req, res) => {
     const {name} = req.query
     userModel
@@ -62,7 +84,6 @@ module.exports = {
       .catch((err) => console.log(err));
   },
   updateUser: (req, res) => {
-    
     userModel
       .updateUser(req.params, req.body)
       .then((data) => formResponse(data, res, 201))
@@ -72,5 +93,6 @@ module.exports = {
     }));
   },
 
+  
   
 };

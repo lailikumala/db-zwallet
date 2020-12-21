@@ -3,6 +3,7 @@ const usersController = require('../Controllers/Users')
 const verifyToken = require('../Helpers/middleware/verifyToken')
 const upload = require('../Helpers/Uploads')
 
+userRoute.get("/check_pin" ,verifyToken.authentication, usersController.checkPin)
 userRoute.get('/search_name', verifyToken.authentication, usersController.getUserName)
 userRoute.get('/', verifyToken.authentication, usersController.getAllUsers)
 userRoute.get('/', verifyToken.authentication, usersController.getUserPagination)

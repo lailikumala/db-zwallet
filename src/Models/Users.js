@@ -2,9 +2,23 @@ const db = require('../Helpers/db')
 const bcrypt = require('bcrypt')
 
 const userModel = {
+    checkPin: (id, pin) => {
+        return new Promise((resolve, reject) => {
+          db.query(`SELECT id, name, email, balance, photo, pin, verified FROM users WHERE id = ${id} && pin = ${pin}`, (err, res) => {
+            if (!err) {
+                resolve(res);
+            } else {
+                reject(err);
+            }
+          });
+        });
+      },
+      
+
+    
     getUserName: (body, name) => {
         return new Promise((resolve, reject) => {
-            const query = `SELECT name, phone, photo FROM users WHERE name LIKE '%${name}%' ORDER BY name ASC`
+            const query = `SELECT id, name, phone, photo, balance FROM users WHERE name LIKE '%${name}' ORDER BY name ASC`
             db.query(query, body, (err, res)=> {
                 if(!err) {
                     resolve(res[0])
@@ -145,6 +159,7 @@ const userModel = {
         });
       },
 
+      
       
     
 }
