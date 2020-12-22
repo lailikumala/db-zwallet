@@ -34,10 +34,8 @@ const authModel = {
                 let dataUser = data[0]
                 if(!data.length) {
                     reject('email is wrong')
-                    // console.log('email/password is wrong')
                 } else {
                     if(!err) { 
-                        // resolve(data[0]);
                         const token = jwt.sign({
                             
                             id: dataUser.id,
@@ -47,8 +45,6 @@ const authModel = {
                             email: dataUser.email
                         
                         }, process.env.SECRET_KEY)
-
-                        //untuk mengecek
                         bcrypt.compare(password, dataUser.password, function(err, result) {
                             if(err) {
                                 reject('password is wrong')

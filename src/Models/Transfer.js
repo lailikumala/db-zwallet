@@ -3,9 +3,18 @@ const db = require('../Helpers/db')
 
 
 const transferModel = {
-    getAllTransfer: ()=> {
+
+    
+    getAllTransfer: (body, page, limit)=> {
         return new Promise((resolve, reject) => {
-            db.query('SELECT id_sender, id_reciever, reciever, notes, amount FROM transfer', (err, res) => {
+            if(!limit) limit = 4;
+            else limit = parseInt(limit);
+
+            if(!page) page = 1;
+            else page = parseInt(page);
+            db.query(`SELECT transfer.id_sender, users.photo, users.name, users.balance, transfer.id_reciever,
+            transfer.amount, transfer.notes, transfer.createAt FROM users INNER JOIN transfer ON 
+            users.id = transfer.id_sender ORDER BY transfer.createAt ASC LIMIT ${limit} OFFSET ${(page-1) * limit} `, (err, res) => {
                 if(!err) {
                     resolve(res)
                 }
@@ -13,74 +22,24 @@ const transferModel = {
             })
         })
     },
-    getPagination: (body, page, limit)=> {
+
+    getTransfer: (body, page, limit, params)=> {
         return new Promise((resolve, reject) => {
             if(!limit) limit = 4;
             else limit = parseInt(limit);
 
             if(!page) page = 1;
             else page = parseInt(page);
-            const query = `SELECT * FROM transfer LIMIT ${limit} OFFSET ${(page-1) * limit}`
-            db.query(query, (err, data) => {
-                if(!err) {
-                    resolve(data)
-                } else {
-                    reject(err)
-                }
-            });
-        });
-    },
-    getReciever: (body, id_reciever) => {
-        return new Promise((resolve, reject) => {
-            const query = `SELECT id_reciever, reciever, notes, balanceLeft FROM transfer WHERE id_reciever LIKE '%${id_reciever}%'`
-            db.query(query, body, (err, res)=> {
-                if(!err) {
-                    resolve(res)
-                } else {
-                    reject(err.message)
-                }
-            })
-        })
-    },
-
-    
-
-    //join
-    getTransfer: ()=> {
-        return new Promise((resolve, reject) => {
-            db.query('SELECT id_reciever, notes, balanceLeft, name, phone FROM transfer INNER JOIN users ON transfer.id=users.id', (err, res) => {
+            db.query(`SELECT transfer.id_reciever, users.photo, transfer.reciever,
+            transfer.amount, transfer.notes, transfer.createAt FROM users INNER JOIN transfer ON 
+            users.id = transfer.id_sender WHERE users.id=? ORDER BY transfer.createAt ASC LIMIT ${limit} OFFSET ${(page-1) * limit} `, params.id, (err, res) => {
                 if(!err) {
                     resolve(res)
                 }
-                console.log(err)
+                reject(err)
             })
         })
     },
-
-    getTransferId: (params) => {
-        return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM transfer WHERE id=?'
-            db.query(query, params.id, (err, res) => {
-            if (!err) {
-                resolve(res[0]);
-            }
-            console.log(err);
-            });
-        });
-    },
-
-    getTransferHistory: (params) => {
-        return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM transfer WHERE id_reciever=?'
-            db.query(query, params.id_reciever, (err, res) => {
-            if (!err) {
-                resolve(res[0]);
-            }
-            console.log(err);
-            });
-        });
-    },
-
 
     createTransfer: (setData)=> {
         return new Promise((resolve, reject) => {
@@ -123,19 +82,6 @@ const transferModel = {
         })
     },
 
-    
-    getHistoryUser: (params, order, offset)=> {
-        const {id_reciever} =params;
-        return new Promise((resolve, reject) => {
-            db.query(`SELECT receiver, balanceLeft, notes, createAt FROM transfer WHERE  id_receiver=${id_reciever} ORDER BY ${order}(createAt))) DESC`, id_reciever,(err, result) => {
-                if(!err) {
-                    resolve(result)
-                } else {
-                    reject(new Error(err))
-                }
-            })
-        })
-    },
     
 }
 
