@@ -5,11 +5,11 @@ const db = require('../Helpers/db')
 const transferModel = {
     getAllTransfer: ()=> {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM transfer', (err, res) => {
+            db.query('SELECT id_sender, id_reciever, reciever, notes, amount FROM transfer', (err, res) => {
                 if(!err) {
                     resolve(res)
                 }
-                console.log(err)
+                reject(err)
             })
         })
     },
