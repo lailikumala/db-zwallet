@@ -23,7 +23,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.get("/", (request, response) => {
-  response.send("Server is working");
+  response.send("Server is running");
 });
 
 //Route
