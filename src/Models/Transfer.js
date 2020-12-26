@@ -32,7 +32,7 @@ const transferModel = {
             else page = parseInt(page);
             db.query(`SELECT transfer.id_reciever, users.name, users.phone, users.balance, users.photo, transfer.reciever,
             transfer.amount, transfer.notes, transfer.createAt FROM users INNER JOIN transfer ON 
-            users.id = transfer.id_sender WHERE users.id=? ORDER BY transfer.createAt ASC LIMIT ${limit} OFFSET ${(page-1) * limit} `, params.id, (err, res) => {
+            users.id = transfer.id_sender WHERE users.id=? ORDER BY transfer.createAt DESC LIMIT ${limit} OFFSET ${(page-1) * limit} `, params.id, (err, res) => {
                 if(!err) {
                     resolve(res)
                 }
