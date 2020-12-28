@@ -4,16 +4,29 @@
 This project creates a complete API rest of the database containing users, transfer, and top up tables. To create a rest-full api use node.js, express, mysql, jsonwebtoken,
 multer and cors with authentication and authorization.
 
-## process
- before starting the program install the packages and other features.
-  ### Create a folder and initialize the project
-   ```
-  npm init -y
-  ```
-  ### install packages
-  ```
-  npm i mysql express body-parser jsonwebtoken multer cors dotenv
-  ```
+## How to install and Run application 
+
+### Download project and install dependencies
+
+```
+~$ git clone https://github.com/lailikumala92/db-zwallet.git
+npm install
+```
+
+### Run Application
+   <ul>
+    <li>Make Sure you had clone this repo</li>
+                              ```
+    <li>Copy environment from  .env.example   </li>
+                              ```
+    <li>Open terminal in this project and run</li>
+    
+   </ul>
+   
+ ```
+npm start
+
+```
 
 ## link documentation postman 
 https://documenter.getpostman.com/view/12536288/TVmHCeN7
