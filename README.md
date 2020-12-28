@@ -16,7 +16,6 @@ npm install
 ### Run Application
    <ul>
     <li>Make Sure you had clone this repo</li>
-    <li>Copy environment from .env.example to .env</li>
     <li>Import file zwallet1.sql to database</li>
     <li>Open terminal in this project and run</li>
     
