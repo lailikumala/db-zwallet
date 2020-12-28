@@ -1,7 +1,7 @@
 # db-zwallet
 
 ## About project
-This project creates a complete API rest of the database containing profile, transaction, and top up tables. To create a rest-full api use node.js, express, mysql, jsonwebtoken,
+This project creates a complete API rest of the database containing users, transfer, and top up tables. To create a rest-full api use node.js, express, mysql, jsonwebtoken,
 multer and cors with authentication and authorization.
 
 ## process
