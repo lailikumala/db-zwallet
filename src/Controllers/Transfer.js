@@ -4,9 +4,8 @@ const formResponse = require("../Helpers/FormResponse");
 module.exports = {
   
   getAllTransfer: (req, res) => {
-    let {page, limit} = req.query
     transferModel
-      .getAllTransfer(req.body, page, limit)
+      .getAllTransfer(req.params)
       .then((data) => formResponse(data, res, 200))
       .catch((err) => console.log(err));
   },
